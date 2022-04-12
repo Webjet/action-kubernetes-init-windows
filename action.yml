@@ -11,5 +11,7 @@ runs:
   steps:
     - name: ACR login
       run: |
-        [System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("${{ inputs.env-json-base64 }}"))
+        $jsonString = [System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("${{ inputs.env-json-base64 }}"))
+        $jsonData = $jsonString | ConvertFrom-Json
+        echo $jsonData.CLIENTID
       shell: powershell
