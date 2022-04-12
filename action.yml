@@ -1,0 +1,15 @@
+name: 'Init environment variables'
+description: 'Init environment variables'
+
+inputs:
+  env-json-base64:
+    description: 'base64 json'
+    required: true
+
+runs:
+  using: "composite"
+  steps:
+    - name: ACR login
+      run: |
+        [System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("${{ inputs.env-json-base64 }}"))
+      shell: powershell
