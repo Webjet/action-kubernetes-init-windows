@@ -13,5 +13,5 @@ runs:
       run: |
         $jsonString = [System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("${{ inputs.env-json-base64 }}"))
         $jsonData = $jsonString | ConvertFrom-Json
-        echo $jsonData.CLIENTID
+        az login --service-principal -u $jsonData.CLIENTID -p $jsonData.CLIENTSECRET --tenant $jsonData.TENANT
       shell: powershell
